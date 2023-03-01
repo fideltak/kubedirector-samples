@@ -1,0 +1,35 @@
+apiVersion: kubedirector.hpe.com/v1beta1
+kind: KubeDirectorApp
+metadata:
+  name: nginx
+spec:
+  config:
+    roleServices:
+    - roleID: server
+      serviceIDs:
+      - server
+    selectedRoles:
+    - server
+  distroID: fideltak/nginx
+  label:
+    description: Nginx Server in KubedirectorApp
+    name: nginx
+  logoURL: https://raw.githubusercontent.com/fideltak/kubedirector-samples/nginx/nginx/logo.jpeg
+  roles:
+  - cardinality: 1
+    id: server
+    imageRepoTag: nginx:1.23
+    maxLogSizeDump: 256
+    minResources:
+      nvidia.com/gpu: 0
+      cpu: 500m
+      memory: 256Mi
+  services:
+  - endpoint:
+      isDashboard: false
+      port: 80
+    id: server
+    label:
+      name: server
+  systemdRequired: true
+  version: "1.23"

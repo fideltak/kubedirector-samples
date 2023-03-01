@@ -3,6 +3,7 @@ kind: KubeDirectorApp
 metadata:
   name: nginx
 spec:
+  configSchemaVersion: 8
   config:
     roleServices:
     - roleID: server
@@ -14,16 +15,16 @@ spec:
   label:
     description: Nginx Server in KubedirectorApp
     name: nginx
-  logoURL: https://raw.githubusercontent.com/fideltak/kubedirector-samples/nginx/nginx/logo.jpeg
+  logoURL: https://raw.githubusercontent.com/fideltak/kubedirector-samples/nginx/nginx/logo.png
   roles:
-  - cardinality: 1
+  - cardinality: "1+"
     id: server
     imageRepoTag: nginx:1.23
     maxLogSizeDump: 256
     minResources:
-      nvidia.com/gpu: 0
-      cpu: 500m
-      memory: 256Mi
+      nvidia.com/gpu: "0"
+      cpu: 1
+      memory: 1Gi
   services:
   - endpoint:
       isDashboard: false

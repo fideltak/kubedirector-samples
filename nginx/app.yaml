@@ -2,6 +2,8 @@ apiVersion: kubedirector.hpe.com/v1beta1
 kind: KubeDirectorApp
 metadata:
   name: nginx
+  annotations:
+    kubedirector.hpe.com/optionalSecretNames: hpecp-ext-auth-secret
 spec:
   configSchemaVersion: 8
   config:
@@ -19,12 +21,16 @@ spec:
   roles:
   - cardinality: "1+"
     id: server
-    imageRepoTag: nginx:1.23
+    imageRepoTag: fideltak/dapp-nginx:0.5
     maxLogSizeDump: 256
     minResources:
       nvidia.com/gpu: "0"
-      cpu: 1
+      cpu: "1"
       memory: 1Gi
+    configPackage:
+      packageURL: https://github.com/fideltak/kubedirector-samples/raw/nginx/nginx/startscript.tgz
+      #packageURL: "file:///opt/configscripts/appconfig.tgz"
+      useNewSetupLayout: true
   services:
   - endpoint:
       isDashboard: false
@@ -32,5 +38,5 @@ spec:
     id: server
     label:
       name: server
-  systemdRequired: true
+#  systemdRequired: true
   version: "1.23"

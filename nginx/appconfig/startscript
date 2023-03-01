@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export TESTENV=TESTVALUE
+touch /fromstartscript
+echo "This is described from startscript!" > /usr/share/nginx/html/index.html
+echo "Done!"
